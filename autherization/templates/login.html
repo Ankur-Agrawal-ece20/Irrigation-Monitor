@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alert alert-danger mt-0 mb-0" role="alert" style="display:{{visibility}};">
+    <strong>Invalid credentials!</strong> Try Again.
+</div>
+<form class="inputform" method="post" action="/login">
+    {% csrf_token %}
+    <h1 class="heading">Please Login</h1>
+    <div><label for="inputusername" class="labels">&#129333;</label>
+    <input class="inputs" type="text" id="inputusername" name="username" placeholder="&#128274; Username" required autofocus></div>
+    <div><label for="inputpassword" class="labels">&#x1F511;</label>
+    <input  class="inputs" type="password" id="inputpassword" name="password" placeholder="&#x1F511; Password" required></div>
+    <button class="submitbtn" type="submit">Sign in</button>
+</form>
+<div class="links">
+    <a href="https://www.linkedin.com/in/ankur-agrawal-a7520a207/">
+        <img src="https://img.icons8.com/material-outlined/24/000000/linkedin--v1.png"/>
+    </a>
+    <a href="https://www.facebook.com/people/Ankur-Agrawal/100056978483894/">
+        <img src="https://img.icons8.com/material-outlined/24/000000/facebook-new.png"/>
+    </a>
+    <a href="https://www.instagram.com/ankuragrawal9455">
+        <img src="https://img.icons8.com/material-outlined/24/000000/instagram-new--v1.png"/>
+    </a>
+</div>
+{% endblock content %}
