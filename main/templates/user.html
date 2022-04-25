@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <img style="max-width: 800px; width: 80vw;" src="https://miro.medium.com/max/1133/0*dozuMwdcMD1B9UyR">
+        </div>
+        <div class="col-sm" style="margin-top: 100px">
+            <h2 id="profile">PROFILE <a href="edit"><i class='bx bx-edit nav_icon'></i></a></h2>
+            <div class="profileContainer">
+                <ul style="list-style-type: none;">
+                    <li>
+                        <h4 id="profile-user-name" style="font-weight: 600; margin-top: 20px;">Name : {{name}}</h4>
+                    </li>
+                    <li>
+                        <h4 id="profile-user-username">Username: {{username}}</h4>
+                    </li>
+                    <li>
+                        <h4 id="profile-email">Email: {{email}}</h4>
+                    </li>
+                    <li>
+                        <h4 id="profile-devies">Devices: {{devices}}</h4>
+                    </li>
+                    <li>
+                        <button onclick="add_device()" style="width:190px;text-align:center;">Add New Device</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function add_device() {
+            id=prompt("Enter Device ID");
+            if(id!=null){
+                window.location.href = "add_device/"+id;
+            }
+        }
+    </script>
+</div>
+{% endblock content%}

@@ -51,3 +51,24 @@ def registerView(request):
         else:
             return render(request, "register.html", context)
     return render(request, "register.html", context)
+
+def editView(request):
+    context = {
+        "visibility": "none",
+    }
+    if request.user.is_authenticated is False:
+        return redirect("/login")
+    if request.method == "POST":
+        name = request.POST.get("name")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        user=User.objects.get(username=request.user.username)
+        user.first_name = name
+        user.username = username
+        user.email = email
+        if user is not None:
+            user.save()
+            return redirect("/")
+        else:
+            return render(request, "edit.html", context)
+    return render(request, "edit.html", context)

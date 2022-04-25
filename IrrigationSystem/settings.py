@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,11 +80,6 @@ WSGI_APPLICATION = 'IrrigationSystem.wsgi.application'
 DATABASES = {
     "default": {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'd63nmephvkgoln',
-       'USER': 'ozrndvkrvtxvda',
-       'PASSWORD': '169d1810a1502d1676b72e0551a852fc3e81499d41694242e9c33406f7562962',
-       'HOST': 'ec2-3-216-221-31.compute-1.amazonaws.com',
-       'PORT': '5432',
     }
 }
 
@@ -95,7 +91,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+    },style="color:#4723D9;border-color:#4723D9;"
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
@@ -135,3 +131,6 @@ LOGOUT_REDIRECT_URL = '/login'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
