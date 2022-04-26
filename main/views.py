@@ -10,13 +10,13 @@ from django.views.decorators.csrf import csrf_exempt
 def new_data(request, id):
     device = get_object_or_404(Device, device_id=id)
     data=request.data
-    device.moisture_level.append(data['moisture_level'])
+    device.moisture_level.append(float(data['moisture_level']))
     if len(device.moisture_level)>50:
         device.moisture_level.pop(0)
-    device.temperature.append(data['temperature'])
+    device.temperature.append(float(data['temperature']))
     if len(device.temperature)>50:
         device.temperature.pop(0)
-    device.humidity.append(data['humidity'])
+    device.humidity.append(float(data['humidity']))
     if len(device.humidity)>50:
         device.humidity.pop(0)
     device.save()
