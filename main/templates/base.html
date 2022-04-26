@@ -18,9 +18,14 @@
   <header class="header" id="header">
     <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
     {% if user.is_authenticated %}
-    <div class="header_text"> Welcome {{ user.first_name }}</div>
+    <div class="header_text" style="font-size:35px;font-weight:800;"> Welcome {{ user.first_name }}</div>
+    <a href="logout">
+    <button type="button" class="btn btn-outline-primary btn-rounded">
+      Logout
+    </button>
+    </a>
     {% else %}
-    <div class="header_text"> Welcome to Irrigation Monitor</div>
+    <div class="header_text" style="font-size:35px;font-weight:800;"> Welcome to Irrigation Monitor</div>
     {% endif %}
   </header>
   <div class="l-navbar" id="nav-bar">
@@ -60,12 +65,19 @@
   <!--Container Main start-->
   <div class="height-100 bg-light">
     <h4>Devices</h4>
-    <div class="d-flex justify-content-center" style="margin-top: 100px;">
+    <div class="d-flex justify-content-center" style="margin: 100px auto;">
       {% block content %}{% endblock %}
     </div>
   </div>
 
-
+  <footer class="bg-dark text-center text-white fixed-bottom ">  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2022 Copyright:
+      <a class="text-white" href="https://github.com/Ankur-Agrawal-ece20" target="_blank"> Ankur-Agrawal</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", function (event) {

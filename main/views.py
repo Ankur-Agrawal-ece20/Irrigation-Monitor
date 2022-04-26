@@ -65,3 +65,11 @@ def manual_mode(request,id):
     device.manual_mode=not device.manual_mode
     device.save()
     return redirect("/devices")
+
+def delete_device(request,id):
+    if request.user.is_authenticated is False:
+        return redirect("/login")
+    
+    device = get_object_or_404(Device, device_id=id)
+    device.delete()
+    return redirect("/devices")

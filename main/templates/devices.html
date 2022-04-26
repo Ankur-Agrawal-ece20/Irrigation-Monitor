@@ -22,7 +22,7 @@
                                 {% csrf_token %}
                                 <label class="btn btn-warning active float-right mt-2">
                                     <input type="checkbox" onChange="this.form.submit()" {% if device.manual_mode %}
-                                        checked {% endif %} autocomplete="off"> Manual Mode
+                                        checked {% endif %} autocomplete="off"> Manual Run
                                 </label>
                             </form>
                         </div>
@@ -36,64 +36,93 @@
         <div class="card-body">
             <canvas id="lineChart-{{device.device_id}}"></canvas>
         </div>
-    </div>
-    <script>
-        var dvc = "{{ device.device_id}}";
-        var temp = "{{ device.temperature}}";
-        // temp = temp;
-        temp = temp.match(/\d+(?:\.\d+)?/g).map(Number)
 
-        var hum = "{{ device.humidity}}";
-        hum = hum.match(/\d+(?:\.\d+)?/g).map(Number);
-        var moi = "{{ device.moisture_level}}";
-        moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
-        var labels = []
-        var lr = " More than an hour ago"
-        for (let i = 0; i < temp.length; i++) {
-            if (moi[i] < 55) {
-                lr = " " + String(5 * (temp.length - i - 1)) + " sec ago"
+        <hr class="my-0">
+
+        <div class="card-body" style="border-bottom: 5px solid black;margin-bottom: 5px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <p class="text-uppercase small mb-2"><strong>Temperature:</strong></p>
+                        <h5 class="font-weight-bold mb-0">{{device.temperature|last}}</h5>
+                    </div>
+                    <div class="col-sm">
+                        <p class="text-uppercase small mb-2"><strong>Humidity:</strong></p>
+                        <h5 class="font-weight-bold mb-0">{{device.humidity|last}}</h5>
+                    </div>
+                    <div class="col-sm">
+                        <p class="text-uppercase small mb-2"><strong>Moisture:</strong></p>
+                        <h5 class="font-weight-bold mb-0">{{device.moisture_level|last}}</h5>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="btn-group-toggle" data-toggle="buttons">
+                            <form method="post" name="form2" action="/delete_device/{{device.device_id}}"
+                                style="background-color: white; border: none;">
+                                {% csrf_token %}
+                                <button class="btn btn-danger active float-right mt-2"> Delete Device </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var dvc = "{{ device.device_id}}";
+            var temp = "{{ device.temperature}}";
+            // temp = temp;
+            temp = temp.match(/\d+(?:\.\d+)?/g).map(Number)
+
+            var hum = "{{ device.humidity}}";
+            hum = hum.match(/\d+(?:\.\d+)?/g).map(Number);
+            var moi = "{{ device.moisture_level}}";
+            moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
+            var labels = []
+            var lr = " More than an hour ago"
+            for (let i = 0; i < temp.length; i++) {
+                if (moi[i] < 55) {
+                    lr = " " + String(5 * (temp.length - i - 1)) + " sec ago"
+                }
+                labels.push([i])
             }
-            labels.push([i])
-        }
-        document.getElementById(dvc).innerHTML = document.getElementById(dvc).innerHTML + lr
-        var ctxL = document.getElementById("lineChart-" + dvc).getContext('2d');
-        var myLineChart = new Chart(ctxL, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "Temperature",
-                        data: temp,
-                        backgroundColor: ['rgba(105, 0, 132, .2)',],
-                        borderColor: ['rgba(200, 99, 132, .7)'
-                            ,],
-                        borderWidth: 2
-                    },
-                    {
-                        label: "Humidity",
-                        data: hum,
-                        backgroundColor:
-                            ['rgba(0, 137, 132, .2)',],
-                        borderColor: ['rgba(0, 10, 130, .7)',],
-                        borderWidth: 2
-                    },
-                    {
-                        label: "Moisture",
-                        data: moi,
-                        backgroundColor:
-                            ['rgba(14, 198, 14, .2)',],
-                        borderColor: ['rgba(14, 198, 14, .7)',],
-                        borderWidth: 2
-                    }
-                ]
-            }, options:
-                { responsive: true }
-        }); 
-    </script>
-    {% endfor %}
-    <!-- Card -->
+            document.getElementById(dvc).innerHTML = document.getElementById(dvc).innerHTML + lr
+            var ctxL = document.getElementById("lineChart-" + dvc).getContext('2d');
+            var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "Temperature",
+                            data: temp,
+                            backgroundColor: ['rgba(105, 0, 132, .2)',],
+                            borderColor: ['rgba(200, 99, 132, .7)'
+                                ,],
+                            borderWidth: 2
+                        },
+                        {
+                            label: "Humidity",
+                            data: hum,
+                            backgroundColor:
+                                ['rgba(0, 137, 132, .2)',],
+                            borderColor: ['rgba(0, 10, 130, .7)',],
+                            borderWidth: 2
+                        },
+                        {
+                            label: "Moisture",
+                            data: moi,
+                            backgroundColor:
+                                ['rgba(14, 198, 14, .2)',],
+                            borderColor: ['rgba(14, 198, 14, .7)',],
+                            borderWidth: 2
+                        }
+                    ]
+                }, options:
+                    { responsive: true }
+            }); 
+        </script>
+        {% endfor %}
+        <!-- Card -->
 
-</div>
+    </div>
 
-{% endblock content%}
+    {% endblock content%}
