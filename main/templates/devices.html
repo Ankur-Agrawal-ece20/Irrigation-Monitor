@@ -24,7 +24,7 @@
         temp = Array.from(temp);
         var hum = "{{ device.humidity}}";
         hum = Array.from(hum);
-        var moi = "{{ device.moisture}}";
+        var moi = "{{ device.moisture_level}}";
         moi = Array.from(moi);
         var labels = []
         console.log("lolz")
@@ -38,39 +38,40 @@
             labels.push([i])
         }
         document.getElementById(dvc).innerHTML = document.getElementById(dvc).innerHTML + lr
-        var ctxL = document.getElementById("lineChart-" + dvc).getContext('2d'); var myLineChart = new
-            Chart(ctxL, {
-                type: 'line', data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: "Temperature",
-                            data: temp,
-                            backgroundColor: ['rgba(105, 0, 132, .2)',],
-                            borderColor: ['rgba(200, 99, 132, .7)'
-                                ,],
-                            borderWidth: 2
-                        },
-                        {
-                            label: "Humidity",
-                            data: hum,
-                            backgroundColor:
-                                ['rgba(0, 137, 132, .2)',],
-                            borderColor: ['rgba(0, 10, 130, .7)',],
-                            borderWidth: 2
-                        },
-                        {
-                            label: "Moisture",
-                            data: moi,
-                            backgroundColor:
-                                ['rgba(14, 198, 14, .2)',],
-                            borderColor: ['rgba(14, 198, 14, .7)',],
-                            borderWidth: 2
-                        }
-                    ]
-                }, options:
-                    { responsive: true }
-            }); 
+        var ctxL = document.getElementById("lineChart-" + dvc).getContext('2d');
+        var myLineChart = new Chart(ctxL, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Temperature",
+                        data: temp,
+                        backgroundColor: ['rgba(105, 0, 132, .2)',],
+                        borderColor: ['rgba(200, 99, 132, .7)'
+                            ,],
+                        borderWidth: 2
+                    },
+                    {
+                        label: "Humidity",
+                        data: hum,
+                        backgroundColor:
+                            ['rgba(0, 137, 132, .2)',],
+                        borderColor: ['rgba(0, 10, 130, .7)',],
+                        borderWidth: 2
+                    },
+                    {
+                        label: "Moisture",
+                        data: moi,
+                        backgroundColor:
+                            ['rgba(14, 198, 14, .2)',],
+                        borderColor: ['rgba(14, 198, 14, .7)',],
+                        borderWidth: 2
+                    }
+                ]
+            }, options:
+                { responsive: true }
+        }); 
     </script>
     {% endfor %}
     <!-- Card -->
