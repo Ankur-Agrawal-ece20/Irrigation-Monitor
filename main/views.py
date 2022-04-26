@@ -2,8 +2,11 @@ from django.shortcuts import render,redirect
 from .models import Device
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
-# Create your views here.
+from django.views.decorators.csrf import csrf_exempt
 
+
+# Create your views here.
+@csrf_exempt
 def new_data(request, id):
     device = get_object_or_404(Device, device_id=id)
     data=request.data
