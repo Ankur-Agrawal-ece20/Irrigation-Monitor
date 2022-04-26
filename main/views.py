@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def new_data(request, id):
     device = get_object_or_404(Device, device_id=id)
-    data=request.data
+    data=request.POST
     device.moisture_level.append(float(data['moisture_level']))
     if len(device.moisture_level)>50:
         device.moisture_level.pop(0)
