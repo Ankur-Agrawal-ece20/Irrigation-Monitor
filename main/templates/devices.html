@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="card-group">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <!-- Card -->
@@ -8,8 +9,26 @@
     <div class="card" style="width: 52rem; max-width: 80vw;">
 
         <div class="card-body">
-            <p id={{device.device_id}} class="text-uppercase small mb-2"><strong>Last Run:</strong></p>
-            <h5 class="font-weight-bold mb-0">ID:{{device.device_id}}</h5>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <p id={{device.device_id}} class="text-uppercase small mb-2"><strong>Last Run:</strong></p>
+                        <h5 class="font-weight-bold mb-0">ID:{{device.device_id}}</h5>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="btn-group-toggle" data-toggle="buttons">
+                            <form method="post" name="form1" action="/manual_mode/{{device.device_id}}"
+                                style="background-color: white; border: none;">
+                                {% csrf_token %}
+                                <label class="btn btn-warning active float-right mt-2">
+                                    <input type="checkbox" onChange="this.form.submit()" {% if device.manual_mode %}
+                                        checked {% endif %} autocomplete="off"> Manual Mode
+                                </label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <hr class="my-0">
@@ -21,19 +40,18 @@
     <script>
         var dvc = "{{ device.device_id}}";
         var temp = "{{ device.temperature}}";
-        temp = Array.from(temp);
+        // temp = temp;
+        temp = temp.match(/\d+(?:\.\d+)?/g).map(Number)
+
         var hum = "{{ device.humidity}}";
-        hum = Array.from(hum);
+        hum = hum.match(/\d+(?:\.\d+)?/g).map(Number);
         var moi = "{{ device.moisture_level}}";
-        moi = Array.from(moi);
+        moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
         var labels = []
-        console.log("lolz")
-        console.log(dvc)
-        console.log(temp.length)
         var lr = " More than an hour ago"
         for (let i = 0; i < temp.length; i++) {
-            if (dvc.moisture_level < 0) {
-                lr = " " + string(temp.length - i - 1) + " min ago"
+            if (moi[i] < 55) {
+                lr = " " + String(5 * (temp.length - i - 1)) + " sec ago"
             }
             labels.push([i])
         }

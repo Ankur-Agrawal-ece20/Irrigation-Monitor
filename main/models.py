@@ -6,6 +6,7 @@ from django.contrib.postgres.fields import ArrayField
 class Device(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     device_id=models.CharField(max_length=100)
+    manual_mode=models.BooleanField(default=False)
     moisture_level=ArrayField(
             models.FloatField(),
             blank=True,
