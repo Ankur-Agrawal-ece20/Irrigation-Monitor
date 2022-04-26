@@ -1,0 +1,1 @@
+web: gunicorn IrrigationSystem.wsgi --log-file -
