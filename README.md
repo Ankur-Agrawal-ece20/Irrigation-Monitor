@@ -17,7 +17,7 @@ This project explains how to make IoT Smart Agriculture with Automatic Irrigatio
 
 A basic django based application which contacts with nodemcu collects the temperature, moisture and humidity data and plots the graph of it.
 User has to register then login and give the id of the device in the website so that they can communicate with each other. <br>
-The code for `nodemcu` is also given in this repo under the `arduino` folder. <br>
+The code for `nodemcu` is also given in this repo under the `IrrigationDevice` folder. <br>
 You can give a unique id to your device and pass the same in website.
 #### The wesite is hosted <a href="https://irrigation-monitor-app.herokuapp.com/" target="_blank">here</a>.
 
@@ -66,8 +66,6 @@ python manage.py runserver
 |NodeMCU | Soil Moisture Sensor | DHT11 Sensor | 	Relay Module | Motor Pump | 12v battery | 12V to 5v converter |
 
 ### <img height="30" src="https://irrigation-monitor-app.herokuapp.com/static/images/icon.png" alt=""/> Final Design of circuit:
-
-<!-- ![WhatsApp Image 2022-04-28 at 2 53 07 PM](https://user-images.githubusercontent.com/78701055/165721566-d4c60f7b-d551-45bd-bf15-091334f749c8.jpeg) -->
 
 ![WhatsApp Image 2022-04-28 at 2 53 07 PM](https://user-images.githubusercontent.com/78701055/165721822-8ce9857e-6f89-431b-96a5-bb17adb5e330.jpeg)
 
