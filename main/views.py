@@ -29,13 +29,13 @@ def index(request):
     name=request.user.first_name
     username=request.user.username
     email=request.user.email
-    devices=Device.objects.filter(user=request.user).count()
+    devices=Device.objects.filter(user__id=request.user.id).count()
     return render(request, "user.html", {'name':name,'username':username,'email':email,'devices':devices})
 
 def devices(request):
     if request.user.is_authenticated is False:
         return redirect("/login")
-    devices=Device.objects.filter(user=request.user)
+    devices=Device.objects.filter(user__id=request.user.id)
     return render(request, "devices.html", {'devices':devices})
 
 def add_device(request,id):
@@ -45,15 +45,9 @@ def add_device(request,id):
     if Device.objects.filter(device_id=id).count()>0:
         return redirect("/devices")
     
-    obj=[0 for i in range(0,50)]
-    Device.objects.create(
-        device_id=id, 
-        user=request.user,
-        manual_mode=False,
-        moisture_level=obj,
-        temperature=obj,
-        humidity=obj,
-        )
+    device, created = Device.objects.get_or_create(device_id=id)
+    device.user.add(request.user)
+    device.save()
 
     return redirect("/devices")
 
@@ -71,5 +65,9 @@ def delete_device(request,id):
         return redirect("/login")
     
     device = get_object_or_404(Device, device_id=id)
-    device.delete()
+    device.user.remove(request.user)
+    if(device.user.count()==0):
+        device.delete()
+    else:
+        device.save()
     return redirect("/devices")
