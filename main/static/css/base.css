@@ -11,6 +11,16 @@
     --z-fixed: 100
 }
 
+#show-btn {
+    display: none;
+}
+
+@media only screen and (max-width: 1250px) {
+    #show-btn {
+        display: block;
+    }
+}
+
 *,
 ::before,
 ::after {
