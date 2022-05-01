@@ -7,7 +7,10 @@ def get_default_array():
 
 # Create your models here.
 class Device(models.Model):
-    user=models.ManyToManyField(User, blank=True)
+    user=ArrayField(
+        models.IntegerField(),
+        blank=True,
+    )
     device_id=models.CharField(max_length=100)
     manual_mode=models.BooleanField(default=False)
     moisture_level=ArrayField(
