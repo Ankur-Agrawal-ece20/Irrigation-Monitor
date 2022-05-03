@@ -43,9 +43,6 @@ def add_device(request,id):
     if request.user.is_authenticated is False:
         return redirect("/login")
     
-    if Device.objects.filter(device_id=id).count()>0:
-        return redirect("/devices")
-    
     device, created = Device.objects.get_or_create(device_id=id)
     device.user.append(request.user.id)
     device.save()

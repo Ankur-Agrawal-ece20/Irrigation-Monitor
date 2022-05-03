@@ -10,6 +10,7 @@ class Device(models.Model):
     user=ArrayField(
         models.IntegerField(),
         blank=True,
+        default=list,
     )
     device_id=models.CharField(max_length=100)
     manual_mode=models.BooleanField(default=False)
