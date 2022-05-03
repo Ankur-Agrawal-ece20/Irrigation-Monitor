@@ -19,7 +19,7 @@ A basic django based application which contacts with nodemcu collects the temper
 User has to register then login and give the id of the device in the website so that they can communicate with each other. <br>
 The code for `nodemcu` is also given in this repo under the `IrrigationDevice` folder. <br>
 You can give a unique id to your device and pass the same in website.
-#### The wesite is hosted <a href="https://irrigation-monitor-app.herokuapp.com/" target="_blank">here</a>.
+#### The website is hosted <a href="https://irrigation-monitor-app.herokuapp.com/" target="_blank">here</a>.
 
 ### <img height="30" src="https://irrigation-monitor-app.herokuapp.com/static/images/icon.png" alt=""/> Setting up the django project :
 
