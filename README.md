@@ -1,5 +1,5 @@
 <p align="center"> 
-   <img width="100%" src="https://user-images.githubusercontent.com/78701055/165725617-1aec864b-7b75-4e90-aa0f-74c6161b00ca.png" alt="Irrigation Monitor"/> 
+   <img width="100%" src="https://user-images.githubusercontent.com/78701055/177348554-432bf332-3bfb-40eb-938b-dd0aa8bce460.png" alt="Irrigation Monitor"/> 
 </p>
 
 
